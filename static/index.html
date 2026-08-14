@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniGrade</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 UniGrade GPA Calculator</h1>
+        <p class="subtitle">Enter your CA and Exam scores for each course</p>
+
+        <form action="/calculate" method="POST">
+            <!-- Student Information -->
+            <div class="course">
+                <h3>👤 Student Information</h3>
+                <label>Full Name:</label>
+                <input type="text" name="name" required placeholder="Enter your full name" style="width: 300px;">
+                <label>Matric Number:</label>
+                <input type="text" name="matric" required placeholder="e.g. ABC/2021/001" style="width: 300px;">
+                <label>Level:</label>
+                <select name="level" style="padding: 8px; width: 150px; border: 1px solid #ccc; border-radius: 4px;">
+                    <option value="100L">100 Level</option>
+                    <option value="200L">200 Level</option>
+                    <option value="300L">300 Level</option>
+                    <option value="400L">400 Level</option>
+                    <option value="500L">500 Level</option>
+                </select>
+                <label>Semester:</label>
+                <select name="semester" style="padding: 8px; width: 150px; border: 1px solid #ccc; border-radius: 4px;">
+                    <option value="First Semester">First Semester</option>
+                    <option value="Second Semester">Second Semester</option>
+                </select>
+            </div>
+
+            <!-- Mathematics -->
+            <div class="course">
+                <h3>Mathematics <span class="unit-badge">3 Units</span></h3>
+                <label>CA Mark (out of 40):</label>
+                <input type="number" name="ca0" min="0" max="40" required placeholder="0-40">
+                <label>Exam Mark (out of 60):</label>
+                <input type="number" name="exam0" min="0" max="60" required placeholder="0-60">
+            </div>
+
+            <!-- English -->
+            <div class="course">
+                <h3>English <span class="unit-badge">3 Units</span></h3>
+                <label>CA Mark (out of 40):</label>
+                <input type="number" name="ca1" min="0" max="40" required placeholder="0-40">
+                <label>Exam Mark (out of 60):</label>
+                <input type="number" name="exam1" min="0" max="60" required placeholder="0-60">
+            </div>
+
+            <!-- Physics -->
+            <div class="course">
+                <h3>Physics <span class="unit-badge">2 Units</span></h3>
+                <label>CA Mark (out of 40):</label>
+                <input type="number" name="ca2" min="0" max="40" required placeholder="0-40">
+                <label>Exam Mark (out of 60):</label>
+                <input type="number" name="exam2" min="0" max="60" required placeholder="0-60">
+            </div>
+
+            <!-- Chemistry -->
+            <div class="course">
+                <h3>Chemistry <span class="unit-badge">2 Units</span></h3>
+                <label>CA Mark (out of 40):</label>
+                <input type="number" name="ca3" min="0" max="40" required placeholder="0-40">
+                <label>Exam Mark (out of 60):</label>
+                <input type="number" name="exam3" min="0" max="60" required placeholder="0-60">
+            </div>
+
+            <!-- Biology -->
+            <div class="course">
+                <h3>Biology <span class="unit-badge">2 Units</span></h3>
+                <label>CA Mark (out of 40):</label>
+                <input type="number" name="ca4" min="0" max="40" required placeholder="0-40">
+                <label>Exam Mark (out of 60):</label>
+                <input type="number" name="exam4" min="0" max="60" required placeholder="0-60">
+            </div>
+
+            <!-- Computer Science -->
+            <div class="course">
+                <h3>Computer Science <span class="unit-badge">1 Unit</span></h3>
+                <label>CA Mark (out of 40):</label>
+                <input type="number" name="ca5" min="0" max="40" required placeholder="0-40">
+                <label>Exam Mark (out of 60):</label>
+                <input type="number" name="exam5" min="0" max="60" required placeholder="0-60">
+            </div>
+
+            <button type="submit">Calculate GPA 🎓</button>
+        </form>
+    </div>
+</body>
+</html>
