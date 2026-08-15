@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 )
 
 var subjects = []string{
@@ -25,6 +26,12 @@ func main() {
 	http.HandleFunc("/", showForm)
 	http.HandleFunc("/calculate", calculate)
 
-	fmt.Println("UniGrade running on http://localhost:8080")
-	http.ListenAndServe(":8080", nil)
+	// Get port from environment variable (Railway sets this)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" // default to 8080 locally
+	}
+
+	fmt.Println("UniGrade running on port:", port)
+	http.ListenAndServe(":"+port, nil)
 }
