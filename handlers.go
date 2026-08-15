@@ -18,18 +18,26 @@ func calculate(w http.ResponseWriter, r *http.Request) {
 	level := r.FormValue("level")
 	semester := r.FormValue("semester")
 
+	// Get number of courses
+	numCourses, _ := strconv.Atoi(r.FormValue("numCourses"))
+
 	totalQualityPoints := 0
 	totalUnits := 0
 	results := ""
 
-	for i, subject := range subjects {
+	// Loop through each course dynamically
+	for i := 0; i < numCourses; i++ {
+		// Get course details from form
+		subject := r.FormValue(fmt.Sprintf("subject%d", i))
+		unit, _ := strconv.Atoi(r.FormValue(fmt.Sprintf("unit%d", i)))
 		ca, _ := strconv.Atoi(r.FormValue(fmt.Sprintf("ca%d", i)))
 		exam, _ := strconv.Atoi(r.FormValue(fmt.Sprintf("exam%d", i)))
 		total := ca + exam
+
 		grade, gradePoint := getGradePoint(total)
-		qualityPoints := gradePoint * units[i]
+		qualityPoints := gradePoint * unit
 		totalQualityPoints += qualityPoints
-		totalUnits += units[i]
+		totalUnits += unit
 
 		results += fmt.Sprintf(`
 			<tr>
@@ -42,7 +50,7 @@ func calculate(w http.ResponseWriter, r *http.Request) {
 				<td>%d</td>
 				<td>%d</td>
 			</tr>
-		`, subject, units[i], ca, exam, total, grade, gradePoint, qualityPoints)
+		`, subject, unit, ca, exam, total, grade, gradePoint, qualityPoints)
 	}
 
 	gpa := float64(totalQualityPoints) / float64(totalUnits)
@@ -52,7 +60,6 @@ func calculate(w http.ResponseWriter, r *http.Request) {
 	cgpaSection := ""
 
 	if semester == "First Semester" {
-		// Save semester 1 results to file
 		record := StudentRecord{
 			Name:   name,
 			Matric: matric,
@@ -71,11 +78,9 @@ func calculate(w http.ResponseWriter, r *http.Request) {
 			</div>`
 
 	} else if semester == "Second Semester" {
-		// Try to load semester 1 results
 		if recordExists(name, matric) {
 			record, err := loadRecord(name, matric)
 			if err == nil {
-				// Calculate CGPA
 				totalQP := record.Semester1.QualityPoints + totalQualityPoints
 				totalU := record.Semester1.Units + totalUnits
 				cgpa := float64(totalQP) / float64(totalU)

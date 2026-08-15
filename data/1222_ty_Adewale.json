@@ -1,0 +1,10 @@
+{
+    "name": "Adewale",
+    "matric": "1222/ty",
+    "level": "500L",
+    "semester1": {
+        "qualityPoints": 42,
+        "units": 16,
+        "gpa": 2.625
+    }
+}
