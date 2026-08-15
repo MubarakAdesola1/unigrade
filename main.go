@@ -1,3 +1,4 @@
+// UniGrade v2 - Dynamic Course Selection
 package main
 
 import (
